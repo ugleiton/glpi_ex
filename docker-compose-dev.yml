@@ -1,0 +1,22 @@
+version: "3.2"
+
+services:
+  mysqlserver:
+    container_name: mysqlserver
+    image: mysql/mysql-server:8.0.27
+    restart: always
+    ports:
+      - "3306:3306"
+    env_file:
+      - .env
+    command: /entrypoint.sh mysqld --default-authentication-plugin=mysql_native_password --disable_log_bin
+
+  glpi:
+    build: .
+    ports:
+      - "80:80"
+    restart: always
+    depends_on:
+      - mysqlserver
+    env_file:
+      - .env
