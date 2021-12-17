@@ -8,6 +8,11 @@ restart:
 up:
 	$(DOCKER-COMPOSE) up -d
 
+.PHONY: down
+down:
+	$(DOCKER-COMPOSE) down
+
+
 .PHONY: logs
 logs:
 	$(DOCKER-COMPOSE) logs -f --tail=100 glpi
